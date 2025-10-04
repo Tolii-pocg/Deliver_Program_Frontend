@@ -1,0 +1,77 @@
+{
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			// uni-ui 规则如下配置
+			"^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+		}
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"backgroundColor": "#ffffff"
+			}
+		},
+		{
+			"path": "pages/My/My",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/Order/Order",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/DelegationPage/DelegationPage",
+			"style": {
+				"navigationBarTitleText": "发布委托"
+			}
+		},
+		{
+			"path": "pages/TakeOrder/TakeOrder",
+			"style": {
+				"navigationBarTitleText": "骑手接单"
+			}
+		}
+	],
+	"tabBar": {
+		"borderStyle": "black",
+		"backgroundColor": "#fff",
+		"color": "#000",
+		"selectedColor": "#000",
+		"list": [
+			{
+				"iconPath": "static/home.png",
+				"selectedIconPath": "static/home-active.png",
+				"text": "首页",
+				"pagePath": "pages/index/index"
+			},
+			{
+				"iconPath": "static/order.png",
+				"selectedIconPath": "static/order-active.png",
+				"text": "订单",
+				"pagePath": "pages/Order/Order"
+			},
+			{
+				"iconPath": "static/my.png",
+				"selectedIconPath": "static/my-active.png",
+				"text": "我的",
+				"pagePath": "pages/My/My"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"titleNView": false
+		}
+	}
+}

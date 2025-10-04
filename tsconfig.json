@@ -1,0 +1,21 @@
+{
+  "extends": "./node_modules/@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "lib": ["esnext", "dom"],
+    "types": ["@dcloudio/types","@uni-helper/uni-app-types","miniprogram-api-typings","@uni-helper/uni-ui-types"]
+  },
+  "vueCompilerOptions": {
+    "plugins": ["@uni-helper/uni-api-types/volar-plugin"],
+    "nativeTags": ["block", "component", "template", "slot"]
+  },
+  "include": [
+    "src/**/*.ts", 
+    "src/**/*.d.ts", 
+    "src/**/*.tsx", 
+  ]
+}
