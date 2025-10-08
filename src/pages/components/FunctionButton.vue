@@ -25,10 +25,7 @@
 .btn-container {
    margin-top: 15px;
    border: 1px solid #e0e0e0;
-   border-radius: 16px;
    padding: 15px;
-   background-color: #f9f9f9;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 .btn-area{
    display: flex;
@@ -56,11 +53,11 @@
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .publish-btn {
-    background: #2979ff;
+    background: linear-gradient(135deg, #2979ff, #a4b0f3);
     border: none;
 }
 .take-btn {
-    background: #2979ff;
+    background:linear-gradient(135deg, #2979ff, #a4b0f3);
     border: none;
 }
 .btn-icon {

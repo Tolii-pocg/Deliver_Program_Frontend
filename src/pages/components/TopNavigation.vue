@@ -1,87 +1,31 @@
 <template>
-    <view class="indexTop">
-        <view class="logo">
-            <image
-            src="@/static/logo.png"
-            mode="heightFix"
-        />
-        </view>
-
-        <view class="userMsg">
-            <image
-                src="@/static/user.png"
-                mode="scaleToFill"
-            />
-            <span>userName</span>
-        </view>
-    </view>
+  <view class="top-navigation">
+    <image :src="userStore.avatar" alt="Avatar" class="avatar" />
+    <text class="username">{{ userStore.username }}</text>
+  </view>
 </template>
 
-<script lang="ts" setup name="TopNavigation">
+<script setup lang="ts">
+import { useUserStore } from '../../store/user';
 
+const userStore = useUserStore();
+userStore.setUser('zhangsan', '/static/user.png');//后期修改调用位置
 </script>
 
 <style scoped>
-.indexTop {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    padding: 0 15px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 999;
+.top-navigation {
+  display: flex;
+  align-items: center;
 }
-
-.logo {
-    flex: 1;
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 10px;
 }
-
-.logo image {
-    height: 40px;
-    width: auto;
-}
-
-.userMsg {
-    display: flex;
-    align-items: center;
-    flex: 2;
-    justify-content: flex-end;
-}
-
-.userMsg image {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-}
-
-.userMsg span {
-    font-size: 16px;
-    color: #333;
-}
-
-.searchInput {
-    flex: 3;
-    margin-left: 20px;
-}
-
-/* 响应式设计 */
-@media screen and (max-width: 768px) {
-    .indexTop {
-        padding: 0 10px;
-    }
-    
-    .logo image {
-        height: 35px;
-    }
-    
-    .userMsg span {
-        font-size: 14px;
-    }
-    
-    .searchInput {
-        margin-left: 10px;
-    }
+.username {
+  margin-left: 10px;
+  font-size: 16px;
+  margin-left: 10px;
 }
 </style>

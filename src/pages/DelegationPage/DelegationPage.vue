@@ -159,7 +159,7 @@ const handleSizeChange = (e: any) => {
   display: flex;
   align-items: center;
   margin-top: 10px;
-  padding: 12px 10px;
+  padding: 12px 0;
 }
 
 .title-decoration {
@@ -226,7 +226,7 @@ textarea.input-field {
 .add-to-cart-btn {
   width: 40px;
   height: 40px;
-  background-color: #f0f0f0;
+  
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -254,9 +254,9 @@ textarea.input-field {
   min-width: 80px;
   text-align: center;
   padding: 8px 12px;
-  border: 1px solid #e5e5e5;
+ 
   border-radius: 4px;
-  background-color: #f8f8f8;
+  
   color: #333;
   font-size: 14px;
   cursor: pointer;
@@ -265,7 +265,7 @@ textarea.input-field {
 
 .uni-data-checkbox .uni-data-checkbox-group .uni-data-checkbox-button.is-checked {
   background-color: #2979ff;
-  color: #fff;
+
   border-color: #2979ff;
 }
 
@@ -274,7 +274,7 @@ textarea.input-field {
   align-items: center;
   margin-top: 20px;
   padding: 10px;
-  background-color: #eaf2ff;
+
   border-radius: 8px;
 }
 
@@ -287,11 +287,5 @@ textarea.input-field {
 .hint-text {
   font-size: 12px;
   color: #2979ff;
-}
-.error-message {
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-  padding-left: 10px;
 }
 </style>
