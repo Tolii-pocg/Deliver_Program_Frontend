@@ -41,6 +41,7 @@ onMounted(() => {
   }
 });
 
+
 const handleExit = () =>{
   uni.exitMiniProgram()
 }

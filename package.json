@@ -63,6 +63,7 @@
     "@dcloudio/uni-cli-shared": "3.0.0-4030620241128001",
     "@dcloudio/uni-stacktracey": "3.0.0-4030620241128001",
     "@dcloudio/vite-plugin-uni": "3.0.0-4030620241128001",
+    "@types/uni-app": "^1.4.8",
     "@types/wechat-miniprogram": "^3.4.8",
     "@uni-helper/uni-app-types": "1.0.0-alpha.6",
     "@vue/runtime-core": "^3.4.21",
