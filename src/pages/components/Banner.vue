@@ -13,7 +13,7 @@
             <swiper-item class="swiper-item" v-for="(item, index) in bannerTestList" :key="index">
                 <image
                     :src="item.imageSrc"
-                    mode="aspectFit"
+                    mode="heightFix"
                 />
             </swiper-item>
         </swiper>
