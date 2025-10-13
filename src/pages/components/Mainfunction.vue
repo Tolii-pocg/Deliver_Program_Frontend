@@ -29,14 +29,14 @@
         <view v-if="currentTab === 'Takefme'" class="T-content">
                 <view style="border-bottom: 1px solid #eeecec; margin-bottom: 40rpx;">
                 <text class="Tmark">取</text>
-                <text style="margin-left: 50rpx; font-size: large;" @click="handleTake">你要从哪里取件</text>
+                <text style="margin-left: 50rpx; font-size: large;" @click="handleTake">{{ TakeAddress }}</text>
                 <text style="font-size: smaller; color: #eeecec; font-weight: lighter; margin-left: 140rpx;">|</text>
                 <text style="margin-left: 30rpx; color:gray;">常用</text>
                 </view>
                 
                 <view style="border-bottom: 1px solid #eeecec; margin-top: 40rpx;">
                 <text class="recive">收</text>
-                <text style="margin-left: 50rpx; font-size: large;">你要从哪里取件</text>
+                <text style="margin-left: 50rpx; font-size: large;" @click="handleRecive">{{ ReciveAddress }}</text>
                 <text style="font-size: smaller; color: #eeecec; font-weight: lighter; margin-left: 140rpx;">|</text>
                 <text style="margin-left: 30rpx; color:gray;">常用</text>
                 </view>
@@ -59,19 +59,28 @@
 
 <script lang="ts" setup name="mainFunction">
 import { ref } from 'vue';
+import { useErrandsInfoStore } from '../../store/errandsInfo'
 
-// 定义当前选中的导航项
+
 const currentTab = ref('Takefme');
 
-// 处理导航点击事件
 function handleNavClick(tabName: string) {
   currentTab.value = tabName;
 }
 
+const TakeAddress = ref('你要从哪里取')
+const ReciveAddress = ref('填写收货地址')
 //帮我取-取件信息
 function handleTake() {
     uni.navigateTo({
-        url: '/pages/TakeMsg/TakeMsg'
+        url: '/pages/TakeInfo/TakeInfo'
+    })
+}
+
+//收获信息
+function handleRecive() {
+    uni.navigateTo({
+        url:'/pages/ReciveInfo/ReciveInfo'
     })
 }
 </script>

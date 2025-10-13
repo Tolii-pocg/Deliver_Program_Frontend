@@ -52,6 +52,7 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-4030620241128001",
     "@dcloudio/uni-ui": "^1.5.11",
     "@uni-helper/uni-ui-types": "1.0.0-alpha.6",
+    "axios": "^1.12.2",
     "pinia": "^3.0.3",
     "pnpm": "^10.17.1",
     "vue": "^3.4.21",
