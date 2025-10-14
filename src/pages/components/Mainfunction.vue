@@ -54,7 +54,7 @@
       </view>
 
       <view class="orderBtn">
-        <button>下单</button>
+        <button>立即下单</button>
       </view>
 
     </view>
@@ -106,7 +106,7 @@ function handleRecive() {
   width: 90%;
   height: 500rpx;
   border-radius: 40rpx;
-  background-color: pink;
+  background-color: #fff;
   position: relative;
 }
 
@@ -147,15 +147,23 @@ function handleRecive() {
     line-height: 60rpx;
     padding-right: 5rpx;
 }
-.orderBtn{
-  position: absolute; /* 子元素设置为绝对定位 */
-  left: 50%; /* 水平方向偏移 50% */
-  transform: translateX(-50%); /* 向左移动自身宽度的一半 */
-  width: 200rpx;
-  margin-top: 50rpx;
+.orderBtn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280rpx;
+  margin-top: 80rpx;
   border-radius: 60rpx;
+  overflow: visible; 
 }
-.orderBtn button{
+
+.orderBtn button {
+  background: linear-gradient(to right, rgb(139, 201, 245), rgb(122, 245, 190)); /* 渐变色 */
   color: #fff;
+  border: none;
+  width: 100%;
+  height: 100rpx;
+  border-radius: 60rpx;
+  font-size: 18px;
 }
 </style>
