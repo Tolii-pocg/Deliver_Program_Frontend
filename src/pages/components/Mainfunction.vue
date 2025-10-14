@@ -53,6 +53,10 @@
         <view v-else-if="currentTab === 'Buyfme'">这是“帮我买”的内容</view>
       </view>
 
+      <view class="orderBtn">
+        <button>下单</button>
+      </view>
+
     </view>
   </view>
 </template>
@@ -102,7 +106,8 @@ function handleRecive() {
   width: 90%;
   height: 500rpx;
   border-radius: 40rpx;
-  background-color: #fff;
+  background-color: pink;
+  position: relative;
 }
 
 .nav-item {
@@ -141,5 +146,16 @@ function handleRecive() {
     color: rgb(122, 245, 190);
     line-height: 60rpx;
     padding-right: 5rpx;
+}
+.orderBtn{
+  position: absolute; /* 子元素设置为绝对定位 */
+  left: 50%; /* 水平方向偏移 50% */
+  transform: translateX(-50%); /* 向左移动自身宽度的一半 */
+  width: 200rpx;
+  margin-top: 50rpx;
+  border-radius: 60rpx;
+}
+.orderBtn button{
+  color: #fff;
 }
 </style>
