@@ -27,18 +27,18 @@
       <!-- 内容区域 -->
       <view class="itemContent">
         <view v-if="currentTab === 'Takefme'" class="T-content">
-                <view style="border-bottom: 1px solid #eeecec; margin-bottom: 40rpx;">
-                <text class="Tmark">取</text>
-                <text style="margin-left: 50rpx; font-size: large;" @click="handleTake">{{ TakeAddress }}</text>
-                <text style="font-size: smaller; color: #eeecec; font-weight: lighter; margin-left: 140rpx;">|</text>
-                <text style="margin-left: 30rpx; color:gray;">常用</text>
+                <view class="address-item take-address">
+                  <text class="Tmark">取</text>
+                  <text class="address-text" @click="handleTake">{{ TakeAddress }}</text>
+                  <text class="divider">|</text>
+                  <text class="common-text">常用</text>
                 </view>
                 
-                <view style="border-bottom: 1px solid #eeecec; margin-top: 40rpx;">
-                <text class="recive">收</text>
-                <text style="margin-left: 50rpx; font-size: large;" @click="handleRecive">{{ ReciveAddress }}</text>
-                <text style="font-size: smaller; color: #eeecec; font-weight: lighter; margin-left: 140rpx;">|</text>
-                <text style="margin-left: 30rpx; color:gray;">常用</text>
+                <view class="address-item receive-address">
+                  <text class="recive">收</text>
+                  <text class="address-text" @click="handleRecive">{{ ReciveAddress }}</text>
+                  <text class="divider">|</text>
+                  <text class="common-text">常用</text>
                 </view>
 
         </view> 
@@ -62,18 +62,25 @@
 </template>
 
 <script lang="ts" setup name="mainFunction">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useErrandsInfoStore } from '../../store/errandsInfo'
 
 
 const currentTab = ref('Takefme');
+const errandsInfoStore = useErrandsInfoStore();
 
 function handleNavClick(tabName: string) {
   currentTab.value = tabName;
 }
 
-const TakeAddress = ref('你要从哪里取')
-const ReciveAddress = ref('填写收货地址')
+// 使用计算属性从store中获取取件地址
+const TakeAddress = computed(() => {
+  // 如果store中有取件地址，则显示地址，否则显示默认文本
+  return errandsInfoStore.takeInfo?.address || '你要从哪里取';
+});
+
+const ReciveAddress = ref('填写收货地址');
+
 //帮我取-取件信息
 function handleTake() {
     uni.navigateTo({
@@ -129,10 +136,12 @@ function handleRecive() {
   background-color: #fcfcfc;
   border-radius: 20rpx;
 }
+
 .T-content{
     margin-left: 40rpx;
     border-radius: 10rpx;
 }
+
 .Tmark{
     font-size: large;
     font-weight: bolder;
@@ -140,6 +149,7 @@ function handleRecive() {
     line-height: 60rpx;
     padding-right: 5rpx;
 }
+
 .recive{
     font-size: large;
     font-weight: bolder;
@@ -147,6 +157,39 @@ function handleRecive() {
     line-height: 60rpx;
     padding-right: 5rpx;
 }
+
+.address-item {
+  position: relative;
+  border-bottom: 1px solid #eeecec;
+  padding: 20rpx 0;
+  min-height: 60rpx;
+}
+
+.take-address {
+  margin-bottom: 20rpx;
+}
+
+.address-text {
+  margin-left: 50rpx;
+  font-size: large;
+}
+
+.divider {
+  position: absolute;
+  right: 80rpx;
+  font-size: smaller;
+  color: #eeecec;
+  font-weight: lighter;
+  line-height: 60rpx;
+}
+
+.common-text {
+  position: absolute;
+  right: 20rpx;
+  color: gray;
+  line-height: 60rpx;
+}
+
 .orderBtn {
   position: absolute;
   left: 50%;

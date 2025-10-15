@@ -57,7 +57,7 @@
         "usingComponents" : true,
         "optimization": {
             "subPackages": {
-                "ignoreUnusedFiles":false
+                "ignoreUnusedFiles": false
             }
         }
     },

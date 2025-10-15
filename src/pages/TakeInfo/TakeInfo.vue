@@ -57,7 +57,7 @@
     <button type="button" class="primary-btn" @click="submitForm">提交</button>
     
     <!-- 引入通告栏组件并传入动态文本 -->
-    <Noticeboard text="请仔细核对您的信息,智能识别功能暂未开放,请谅解"/>
+    <Noticeboard text="欢迎使用取件信息填写功能，请仔细核对您的信息" />
   </view>
 </template>
 
@@ -124,10 +124,6 @@ const rules = {
 
 const parseSmartInput = () => {
   // 智能识别功能待实现
-  uni.showToast({
-      title: '尽情期待!',
-      icon: 'none'
-    })
 }
 
 const submitForm = () => {
@@ -138,6 +134,11 @@ const submitForm = () => {
       title: '提交成功',
       icon: 'success'
     })
+    
+    // 提交成功后返回上一页
+    setTimeout(() => {
+      uni.navigateBack()
+    }, 1000)
   }).catch((err) => {
     // 表单验证失败
     uni.showToast({
@@ -151,6 +152,7 @@ const submitForm = () => {
 <style scoped>
 .TakeMsg {
   padding: 20rpx;
+  padding-bottom: 120rpx; /* 为底部通告栏留出空间 */
 }
 
 .smart-input-section {
@@ -196,6 +198,7 @@ const submitForm = () => {
   height: 80rpx;
   font-size: 32rpx;
   margin-top: 40rpx;
+  margin-bottom: 100rpx; /* 为底部通告栏留出空间 */
 }
 
 .primary-btn:active,
