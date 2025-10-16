@@ -32,12 +32,6 @@
 			"style": {
 				"navigationBarTitleText": "取件信息"
 			}
-		},
-		{
-			"path": "pages/ReciveInfo/ReciveInfo",
-			"style": {
-				"navigationBarTitleText": "收货信息"
-			}
 		}
 	],
 	"tabBar": {

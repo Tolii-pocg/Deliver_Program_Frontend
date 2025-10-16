@@ -29,10 +29,11 @@ const noticeText = ref('WeTake仍未上线,陶还需努力,fighting!!!fighting!!
 const bottomOffset = ref(110)
 
 onMounted(() => {
-    const systemInfo = uni.getSystemInfoSync()
-    const safeArea = systemInfo.safeArea || {}
-    if (typeof systemInfo.windowHeight === 'number' && typeof safeArea.bottom === 'number') {
-        bottomOffset.value = Math.min(systemInfo.windowHeight - safeArea.bottom, 110)
+    // 使用新的API替代废弃的getSystemInfoSync
+    const windowInfo = uni.getWindowInfo()
+    const safeArea = windowInfo.safeArea || {}
+    if (typeof windowInfo.windowHeight === 'number' && typeof safeArea.bottom === 'number') {
+        bottomOffset.value = Math.min(windowInfo.windowHeight - safeArea.bottom, 110)
     } else {
         bottomOffset.value = 110
     }
