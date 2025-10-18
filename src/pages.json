@@ -32,6 +32,14 @@
 			"style": {
 				"navigationBarTitleText": "取件信息"
 			}
+		},
+		{
+			"path": "pages/BuyInfo/BuyInfo",
+			"style": {
+				"navigationBarTitleText": "购买信息",
+				"navigationStyle":"custom"
+				
+			}
 		}
 	],
 	"tabBar": {

@@ -30,7 +30,7 @@ const bottomOffset = ref(110)
 
 onMounted(() => {
     // 使用新的API替代废弃的getSystemInfoSync
-    const windowInfo = uni.getWindowInfo()
+    const windowInfo = (uni as any).getWindowInfo
     const safeArea = windowInfo.safeArea || {}
     if (typeof windowInfo.windowHeight === 'number' && typeof safeArea.bottom === 'number') {
         bottomOffset.value = Math.min(windowInfo.windowHeight - safeArea.bottom, 110)

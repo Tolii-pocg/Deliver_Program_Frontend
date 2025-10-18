@@ -6,28 +6,28 @@ interface TakeInfo {
   code: string;
   name: string;
   phoneLastFour: string;
-  trackingNumber: string;
+  trackingNumber?: string;
 }
 
-// 定义收货信息的接口
+// 定义收货信息的接口 (根据 Mainfunction.vue 组件中的实际使用情况)
 interface ReceiveInfo {
-  area: Array<{text: string, value: string}>;
-  areaText: string;
-  detailAddress: string;
-  time: string;
+  region? : string;                 // 可选 - 省市区
+  detailAddress : string;          // 可选 - 详细地址
+  timeType : 'noon' | 'evening' | 'custom';  // 可选 - 时间类型
+  customTime : string;             // 可选 - 自定义时间
 }
 
 export const useErrandsInfoStore = defineStore('errandsInfo', {
   state: () => ({
-    takeInfo: {} as Partial<TakeInfo>, // 使用 Partial 允许部分字段为空
-    receiveInfo: {} as Partial<ReceiveInfo> // 使用 Partial 允许部分字段为空
+    takeInfo: {} as Partial<TakeInfo>,     // 取件信息
+    receiveInfo: {} as Partial<ReceiveInfo> // 收货信息
   }),
   actions: {
     setTakeInfo(info: Partial<TakeInfo>) {
       this.takeInfo = info;
     },
     setReceiveInfo(info: Partial<ReceiveInfo>) {
-      this.receiveInfo = info;
+      this.receiveInfo = info;  // 修复属性名
     }
   }
 });
