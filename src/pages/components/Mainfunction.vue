@@ -260,9 +260,18 @@ const TakeAddress = computed(() => {
   return errandsInfoStore.takeInfo?.address || "填写取件信息";
 });
 
-// 修改收货地址显示逻辑，只显示详细地址
+// 修改收货地址显示逻辑，根据不同tab显示对应类型的收货地址（只显示详细地址）
 const ReciveAddress = computed(() => {
-  return receiveInfo.value.detailAddress || "填写收货信息";
+  if (currentTab.value === 'Takefme') {
+    // 显示帮我取的收货地址（只显示详细地址）
+    const takeReceiveInfo = errandsInfoStore.takeReceiveInfo;
+    return takeReceiveInfo?.detailAddress || "填写收货信息";
+  } else if (currentTab.value === 'Buyfme') {
+    // 显示帮我买的收货地址（只显示详细地址）
+    const buyReceiveInfo = errandsInfoStore.buyReceiveInfo;
+    return buyReceiveInfo?.detailAddress || "填写收货信息";
+  }
+  return "填写收货信息";
 });
 
 //帮我取-取件信息
@@ -274,6 +283,45 @@ function handleTake() {
 
 //收获信息
 function handleRecive() {
+  // 根据当前tab加载对应的收货地址数据
+  if (currentTab.value === 'Takefme') {
+    const takeReceiveInfo = errandsInfoStore.takeReceiveInfo;
+    if (takeReceiveInfo && Object.keys(takeReceiveInfo).length > 0) {
+      receiveInfo.value = {
+        region: takeReceiveInfo.region || "",
+        detailAddress: takeReceiveInfo.detailAddress || "",
+        timeType: takeReceiveInfo.timeType || "noon",
+        customTime: takeReceiveInfo.customTime || ""
+      };
+    } else {
+      // 重置为空
+      receiveInfo.value = {
+        region: "",
+        detailAddress: "",
+        timeType: "noon",
+        customTime: ""
+      };
+    }
+  } else if (currentTab.value === 'Buyfme') {
+    const buyReceiveInfo = errandsInfoStore.buyReceiveInfo;
+    if (buyReceiveInfo && Object.keys(buyReceiveInfo).length > 0) {
+      receiveInfo.value = {
+        region: buyReceiveInfo.region || "",
+        detailAddress: buyReceiveInfo.detailAddress || "",
+        timeType: buyReceiveInfo.timeType || "noon",
+        customTime: buyReceiveInfo.customTime || ""
+      };
+    } else {
+      // 重置为空
+      receiveInfo.value = {
+        region: "",
+        detailAddress: "",
+        timeType: "noon",
+        customTime: ""
+      };
+    }
+  }
+  
   // 打开底部弹窗
   receivePopup.value?.open();
 }
@@ -324,13 +372,23 @@ function saveReceiveInfo() {
     });
     return;
   }
-  // 这里可以添加保存到store或其他业务逻辑
-  errandsInfoStore.setReceiveInfo({
-    region: receiveInfo.value.region,
-    detailAddress: receiveInfo.value.detailAddress,
-    timeType: receiveInfo.value.timeType as "noon" | "evening" | "custom",
-    customTime: receiveInfo.value.customTime,
-  });
+  
+  // 根据当前tab保存到对应的store字段
+  if (currentTab.value === 'Takefme') {
+    errandsInfoStore.setTakeReceiveInfo({
+      region: receiveInfo.value.region,
+      detailAddress: receiveInfo.value.detailAddress,
+      timeType: receiveInfo.value.timeType as "noon" | "evening" | "custom",
+      customTime: receiveInfo.value.customTime,
+    });
+  } else if (currentTab.value === 'Buyfme') {
+    errandsInfoStore.setBuyReceiveInfo({
+      region: receiveInfo.value.region,
+      detailAddress: receiveInfo.value.detailAddress,
+      timeType: receiveInfo.value.timeType as "noon" | "evening" | "custom",
+      customTime: receiveInfo.value.customTime,
+    });
+  }
 
   // 关闭弹窗
   receivePopup.value?.close();
