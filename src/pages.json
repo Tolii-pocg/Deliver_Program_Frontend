@@ -37,8 +37,13 @@
 			"path": "pages/BuyInfo/BuyInfo",
 			"style": {
 				"navigationBarTitleText": "购买信息",
-				"navigationStyle":"custom"
-				
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/buyRemark/buyRemark",
+			"style": {
+				"navigationBarTitleText": "购买备注"
 			}
 		}
 	],
