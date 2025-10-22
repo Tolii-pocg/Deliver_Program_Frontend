@@ -32,8 +32,6 @@
             <text class="address-text" @click="handleTake">{{
               TakeAddress
             }}</text>
-            <text class="divider">|</text>
-            <text class="common-text">常用</text>
           </view>
 
           <view class="address-item receive-address">
@@ -50,8 +48,6 @@
           <view class="address-item send-address">
             <text class="Tmark">寄</text>
             <text class="address-text" @click="handleSend">填写寄件信息</text>
-            <text class="divider">|</text>
-            <text class="common-text">常用</text>
           </view>
         </view>
 
@@ -59,22 +55,11 @@
           <view class="address-item buy-address">
             <text class="Tmark">买</text>
             <text class="address-text" @click="handleBuy">填写购买信息</text>
-            <text class="divider">|</text>
-            <text class="common-text">常用</text>
-          </view>
-
-          <view class="address-item receive-address">
-            <text class="recive">收</text>
-            <text class="address-text" @click="handleRecive">{{
-              ReciveAddress
-            }}</text>
-            <text class="divider">|</text>
-            <text class="common-text">常用</text>
           </view>
         </view>
       </view>
 
-      <OrderButton />
+      <OrderButton v-if="currentTab === 'Takefme'"/>
     </view>
 
     <!-- 收货信息弹窗 -->
@@ -266,10 +251,6 @@ const ReciveAddress = computed(() => {
     // 显示帮我取的收货地址（只显示详细地址）
     const takeReceiveInfo = errandsInfoStore.takeReceiveInfo;
     return takeReceiveInfo?.detailAddress || "填写收货信息";
-  } else if (currentTab.value === 'Buyfme') {
-    // 显示帮我买的收货地址（只显示详细地址）
-    const buyReceiveInfo = errandsInfoStore.buyReceiveInfo;
-    return buyReceiveInfo?.detailAddress || "填写收货信息";
   }
   return "填写收货信息";
 });
@@ -292,24 +273,6 @@ function handleRecive() {
         detailAddress: takeReceiveInfo.detailAddress || "",
         timeType: takeReceiveInfo.timeType || "noon",
         customTime: takeReceiveInfo.customTime || ""
-      };
-    } else {
-      // 重置为空
-      receiveInfo.value = {
-        region: "",
-        detailAddress: "",
-        timeType: "noon",
-        customTime: ""
-      };
-    }
-  } else if (currentTab.value === 'Buyfme') {
-    const buyReceiveInfo = errandsInfoStore.buyReceiveInfo;
-    if (buyReceiveInfo && Object.keys(buyReceiveInfo).length > 0) {
-      receiveInfo.value = {
-        region: buyReceiveInfo.region || "",
-        detailAddress: buyReceiveInfo.detailAddress || "",
-        timeType: buyReceiveInfo.timeType || "noon",
-        customTime: buyReceiveInfo.customTime || ""
       };
     } else {
       // 重置为空
@@ -376,13 +339,6 @@ function saveReceiveInfo() {
   // 根据当前tab保存到对应的store字段
   if (currentTab.value === 'Takefme') {
     errandsInfoStore.setTakeReceiveInfo({
-      region: receiveInfo.value.region,
-      detailAddress: receiveInfo.value.detailAddress,
-      timeType: receiveInfo.value.timeType as "noon" | "evening" | "custom",
-      customTime: receiveInfo.value.customTime,
-    });
-  } else if (currentTab.value === 'Buyfme') {
-    errandsInfoStore.setBuyReceiveInfo({
       region: receiveInfo.value.region,
       detailAddress: receiveInfo.value.detailAddress,
       timeType: receiveInfo.value.timeType as "noon" | "evening" | "custom",
