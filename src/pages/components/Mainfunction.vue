@@ -18,7 +18,7 @@
       </text>
       <text
         :class="['nav-item', { active: currentTab === 'Buyfme' }]"
-        @click="handleNavClick('Buyfme')"
+        @click="handleBuy"
         hover-class="none"
       >
         帮我买
@@ -48,13 +48,6 @@
           <view class="address-item send-address">
             <text class="Tmark">寄</text>
             <text class="address-text" @click="handleSend">填写寄件信息</text>
-          </view>
-        </view>
-
-        <view v-else-if="currentTab === 'Buyfme'" class="T-content">
-          <view class="address-item buy-address">
-            <text class="Tmark">买</text>
-            <text class="address-text" @click="handleBuy">填写购买信息</text>
           </view>
         </view>
       </view>

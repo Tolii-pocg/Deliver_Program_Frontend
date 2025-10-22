@@ -55,6 +55,7 @@
           @input="handleInput"
         />
         <view class="textarea-footer">
+          <view class="upload-link" @click="upload">上传样图</view>
           <text class="word-count">{{ currentLength }}/500</text>
         </view>
       </view>
@@ -71,6 +72,47 @@
           src="/static/Goto.png"
           mode="aspectFit"
         ></image>
+      </view>
+    </view>
+
+    <view class="addressSelection">
+      <view class="nav-item">
+        <view
+          class="tab-item"
+          :class="{ active: currentTab === 'nearby' }"
+          @click="switchTab('nearby')"
+        >
+          就近购买
+        </view>
+        <view
+          class="tab-item"
+          :class="{ active: currentTab === 'specify' }"
+          @click="switchTab('specify')"
+        >
+          指定地点购买
+        </view>
+      </view>
+      <view class="content-container">
+        <view
+          class="selection-Ncontent tab-content"
+          v-show="currentTab === 'nearby'"
+        >
+          <transition name="slide-fade">
+            <view v-if="currentTab === 'nearby'" class="tab-panel">
+              就近购买内容区域
+            </view>
+          </transition>
+        </view>
+        <view
+          class="selection-Scontent tab-content"
+          v-show="currentTab === 'specify'"
+        >
+          <transition name="slide-fade">
+            <view v-if="currentTab === 'specify'" class="tab-panel">
+              指定地点购买内容区域
+            </view>
+          </transition>
+        </view>
       </view>
     </view>
   </view>
@@ -93,7 +135,7 @@ const notices = ref<string[]>([
 ]);
 const productInfo = ref<string>("");
 const currentLength = ref<number>(0);
-const maxlength = 500;
+const currentTab = ref("nearby");
 
 let timer: ReturnType<typeof setInterval> | null = null;
 
@@ -152,6 +194,26 @@ function handleRemark() {
     url: "/pages/buyRemark/buyRemark",
   });
 }
+
+function upload() {
+  (uni as any).chooseMedia({
+    count: 2,
+    mediaType: ["image"],
+    success: (success) => {
+      console.log(success.tempFiles, "-----");
+    },
+    fail: (fail) => {
+      uni.showToast({
+        title: "上传失败请重试",
+        icon: "none",
+      });
+    },
+  });
+}
+
+const switchTab = (tab: string) => {
+  currentTab.value = tab;
+};
 </script>
 
 <style scoped>
@@ -198,7 +260,6 @@ function handleRemark() {
 .content {
   width: 700rpx;
   height: 500rpx;
-  background-color: #fffefe;
   border-radius: 10rpx;
 }
 
@@ -262,9 +323,17 @@ function handleRemark() {
 
 .textarea-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-top: 10rpx;
   box-sizing: border-box;
+}
+
+.upload-link {
+  text-decoration: underline;
+  font-size: small;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: #5c98ff;
 }
 
 .word-count {
@@ -300,5 +369,87 @@ function handleRemark() {
   width: 30rpx;
   height: 30rpx;
   flex-shrink: 0;
+}
+
+.addressSelection {
+  margin-top: 10rpx;
+  width: 700rpx;
+  height: 550rpx;
+  border-radius: 10rpx;
+}
+.nav-item {
+  display: flex;
+  width: 100%;
+  border-radius: 10rpx;
+  border: 1rpx solid #e2e2e2;
+  background-color: #f0f0f0;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #666;
+  font-weight: normal;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab-item:first-child {
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+}
+
+.tab-item:last-child {
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+}
+
+.tab-item.active {
+  background-color: #ffffff;
+  color: #007aff;
+  font-weight: bold;
+}
+
+.content-container {
+  position: relative;
+  height: 500rpx;
+  width: 100%;
+}
+
+.tab-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.tab-panel {
+  padding: 20rpx;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: pink;
+}
+
+/* 滑动淡入淡出动画 */
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from {
+  transform: translateX(20rpx);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(-20rpx);
+  opacity: 0;
 }
 </style>
